@@ -10,8 +10,16 @@ docker compose up -d
 # 4. Copia il file .env
 cp src/.env.example src/.env
 
-# 5. Genera la chiave Laravel
+# 5. Modificare .env con
+DB_CONNECTION=pgsql
+DB_HOST=postgres
+DB_PORT=5432
+DB_DATABASE=laravel_app
+DB_USERNAME=laravel_user
+DB_PASSWORD=secret 
+
+# 5. Genera la chiave Laravel (solo la prima volta per creazione DB) 
 docker compose run --rm artisan key:generate
 
-# 6. Esegui le migration
+# 6. Esegui le migration (solo la prima volta per creazione DB)
 docker compose run --rm artisan migrate
