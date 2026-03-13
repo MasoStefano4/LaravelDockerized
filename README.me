@@ -1,0 +1,21 @@
+# 1. Clona il progetto
+git clone ...
+cd progetto
+
+# 2. Copia il file env
+cp src/.env.example src/.env
+
+# 3. Installa le dipendenze PHP
+docker compose run --rm composer install
+
+# 4. Installa le dipendenze JS
+docker compose run --rm --user root npm install
+
+# 5. Avvia i container
+docker compose up -d nginx php postgres redis npm
+
+# 6. Genera la chiave
+docker compose run --rm artisan key:generate
+
+# 7. Esegui le migrazioni
+docker compose run --rm artisan migrate
