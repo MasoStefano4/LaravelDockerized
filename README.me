@@ -1,21 +1,17 @@
-# 1. Clona il progetto
-git clone ...
-cd progetto
-
-# 2. Copia il file env
-cp src/.env.example src/.env
-
-# 3. Installa le dipendenze PHP
+# 1. Installa le dipendenze PHP
 docker compose run --rm composer install
 
-# 4. Installa le dipendenze JS
-docker compose run --rm --user root npm install
+# 2. Installa le dipendenze JS
+docker compose run --rm npm install
 
-# 5. Avvia i container
-docker compose up -d nginx php postgres redis npm
+# 3. Avvia i container
+docker compose up -d
 
-# 6. Genera la chiave
+# 4. Copia il file .env
+cp src/.env.example src/.env
+
+# 5. Genera la chiave Laravel
 docker compose run --rm artisan key:generate
 
-# 7. Esegui le migrazioni
+# 6. Esegui le migration
 docker compose run --rm artisan migrate

@@ -3,6 +3,8 @@ networks:
 
 volumes:
   node_modules:
+  postgres_data:
+
 
 services:
   nginx:
@@ -33,19 +35,19 @@ services:
       - projectname
 
   postgres:
-    image: postgres:16
     container_name: project_name_postgres
-    restart: always
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_DB: laravel_app
-      POSTGRES_USER: laravel_user
       POSTGRES_PASSWORD: secret
+      POSTGRES_USER: laravel_user
+    image: postgres:16
     networks:
-      - projectname
+      projectname: null
+    ports:
+      - "5432:5432"
+    restart: always
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
   composer:
     image: composer:latest
